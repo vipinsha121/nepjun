@@ -1,0 +1,19 @@
+@import "./src/assets/styles/index.scss";
+
+.runner-chooser {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #eaeef2;
+  border-radius: 4px;
+  margin: 15px 0;
+}
+
+.alert-message {
+  width: 100%;
+  padding-top: 15px;
+  margin: 0;
+}
+
+.modal-footer {
+  color: white;
+}

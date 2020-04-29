@@ -1,0 +1,43 @@
+<div class="col-md-12 col-lg-12 page-dashboard">
+  <span id="sales">Sales</span>
+  <span class="tab-item active" [class.active]="active_tab_item == 1" (click)="onClickTabItem(1)">30 Days</span>
+  <span class="tab-item active" [class.active]="active_tab_item == 0" (click)="onClickTabItem(0)">7 Days</span>
+</div><br>
+
+<!-- <custom-menu></custom-menu> -->
+
+<nb-card class="page-dashboard">
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-3">
+        <div class="flex-start">
+            <p class="p-bold">Subtotal: </p>
+            <p>${{ subtotal.toFixed(2) }}</p>
+        </div>
+        <div class="flex-start">
+            <p class="p-bold">Tax: </p>
+            <p>${{ tax.toFixed(2) }}</p>
+        </div>
+        <div class="flex-start">
+            <p class="p-bold">Service Fee: </p>
+            <p>${{ serviceFee }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div echarts [options]="chartOptions" class="echart"></div>
+      </div>
+    </div><br><br>
+    <div class="row">
+      <div class="col-md-12"><h3 style="font-size: 16px;font-weight: 600;color: #5b5b61;">Top Selling Menu Items</h3></div>
+    </div>
+    <div class="row top-selling-item">
+      <div *ngFor="let item of topSellingItems" class="col-md-4">
+        <span class="item-count">{{ item.qty }}</span>
+        {{ item.name }}
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+<br><br>

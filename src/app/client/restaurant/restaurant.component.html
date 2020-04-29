@@ -1,0 +1,10 @@
+<nb-card>
+  <nb-card-header>
+    Concessions
+  </nb-card-header>
+
+  <nb-card-body class="restaurant-table">
+    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)" (createConfirm)="onCreateConfirm($event)"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+

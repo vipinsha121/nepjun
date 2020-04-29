@@ -1,0 +1,13 @@
+// :host /deep/ {
+//      .nb-theme-default ng2-smart-table table tr.ng2-smart-titles th {
+//         padding: 10px !important;
+//     }
+//     .nb-theme-default ng2-smart-table table tr th, .nb-theme-default ng2-smart-table table tr td {
+//        padding: 10px !important;
+//    }
+// }
+
+// ::ng-deep ng2-smart-table table tr th, ng2-smart-table table tr td {
+//     padding: 10px !important;
+// }
+

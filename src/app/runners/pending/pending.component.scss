@@ -1,0 +1,49 @@
+@import "./src/assets/styles/index.scss";
+
+.matTable table > tbody > tr > td, .matTable table > thead > tr > th {
+    position: relative;
+    padding: 0.875rem 1.25rem;
+    vertical-align: middle;
+    border-left: 0px solid;
+    border-right: 0px solid;
+}
+.matTable table > tbody > tr > td:nth-child(1)
+{
+    position: relative;
+    text-decoration:underline;
+}
+button.gm-control-active.gm-fullscreen-control {
+    left: 0;
+    top: unset!important;
+    bottom: 23px!important;
+}
+
+::ng-deep .nb-theme-default ng2-smart-table tbody tr:nth-child(2n) {
+    background-color: white;
+}
+
+:host /deep/ tr.pending {
+    background-color: white !important;
+}
+:host /deep/ tr.ready2pickup {
+    background-color: #f5f7fc !important;
+}
+
+.btn-custom {
+    padding: 0 4px !important;
+    font-size: 2rem !important;
+    background-color: white;
+    color: $color-bg-active;
+    border-radius: 4px;
+}
+@media only screen
+  and (max-device-width: 767px)
+  and (min-device-width: 320px)
+  and (orientation: landscape)
+  and (-webkit-min-device-pixel-ratio: 2)
+{
+  .layout-container
+{
+	margin-top:8em;
+}
+}

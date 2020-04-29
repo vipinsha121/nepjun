@@ -1,0 +1,24 @@
+<nb-card>
+  <agm-map *ngIf="showMap" style="height:352px; z-index: 1!important;"  [latitude]="lat" [longitude]="long" 
+  [zoom]="15" [zoomControl]="true" [fullscreenControl]="true" [fullscreenControlOptions]="screenOptions" [streetViewControl]="false" [minZoom]="10">
+  <div *ngIf="pOrders && pOrders.length>0" >
+    <agm-marker *ngFor="let order of pOrders" [latitude]="order.latitude" 
+      [longitude]="order.longitude" [iconUrl]="order.icon"  (markerClick)="orderDetailsModal(order,'MapModal')">
+  </agm-marker>
+  </div>
+</agm-map>
+  <nb-card-header>
+    <div class="flex-space-between">
+      <p style="margin:0">Active Orders</p> 
+      <!-- <img src="../../../assets/images/volume_off.png" alt="volume_off" id="btn-enable-audio" (click)="enableAudio()" *ngIf="showEnableAudio"> -->
+      <!-- <img src="../../../assets/images/volume_up.png" alt="volume_up" (click)="disableAudio()" *ngIf="!showEnableAudio"> -->
+    </div>
+    <p class="date-span" style="margin:0">(Last Updated on {{today | date:'EE h:mm a'}})</p>
+  </nb-card-header>
+
+  <nb-card-body class="contactTable ">
+    <ng2-smart-table class="matTable" [settings]="settings"  (userRowSelect)="orderDetailsModal($event,'RowModal')"  [source]="source"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<!-- <audio src="../../assets/sounds/WoopWoop.wav" id="audio"></audio> -->

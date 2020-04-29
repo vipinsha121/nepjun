@@ -1,0 +1,59 @@
+@import "./src/assets/styles/index.scss";
+.runner-chooser {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #eaeef2;
+  border-radius: 4px;
+  margin: 15px 0;
+}
+
+.row-detail {
+  @extend .flex-space-between;
+}
+.row-detail p {
+  margin: 5px 0;
+}
+.row-detail p:first-child {
+  width: 25%;
+  font-weight: bold;
+}
+.row-detail p:nth-child(2) {
+  width: 75%;
+}
+
+.receipt-wrapper {
+  padding: 10px;
+  border: 1px solid $color-fg-highlight;
+  border-radius: 4px;
+  margin-top: 10px;
+  color: $color-fg;
+}
+
+.receipt-checkout-items {
+    @extend .flex-space-between;
+    border-bottom: 1px solid $color-fg-highlight;
+    padding: 7px 0;
+}
+
+.receipt-checkout-items p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.receipt-checkout-items span {
+    margin-right: 5px;
+}
+
+.checkout-total {
+  font-size: 13px;
+  padding-top: 15px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid grey;
+}
+.checkout-total p {
+  margin: 0;
+}
+
+.modal-body {
+  color: $color-fg;
+}

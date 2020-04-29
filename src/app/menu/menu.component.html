@@ -1,0 +1,189 @@
+<div class="row page-menu" *ngIf="isValid">
+  <div class="col-12" *ngIf="isClient; else isNotClient">
+    <div class="row">
+        <div class="col-6 col-lg-3">
+            <mat-select [(ngModel)]="selectedRestaurantIndex" (ngModelChange)="onSelectRestaurant($event)">
+              <mat-option [value]="i" *ngFor="let restaurant of restaurants; let i = index">{{restaurant.name}}</mat-option>
+            </mat-select>
+        </div>
+        <div class="col-6 col-lg-9 flex-end" *ngIf="currentUser.has_appetize === 'Yes'">
+            <p (click)="smModal.show()">Add items from Appetize</p>
+            <i class="nb-plus-circled" (click)="smModal.show()"></i>
+        </div>
+
+        <!-- <div class="col-6 col-lg-9 flex-end" *ngIf="currentUser.has_ncr === 'Yes'" (click)="onRefreshNCR()" style="cursor:pointer;">
+            <p>Refresh menu items</p>
+            <i class="nb-loop" style="color: #1a8a1a;font-weight: bold; margin-left: 10px;"></i>
+        </div> -->
+    </div>
+  </div>
+  <!-- <ng-template #isNotClient>
+    <div class="col-md-12 col-lg-12">
+      <span id="menu">
+        <span *ngIf="selectedRestaurant !== null">{{ selectedRestaurant.name }}</span>
+        <span *ngIf="myMenu !== null"> / </span>
+        <span *ngIf="myMenu !== null">Menu</span> 
+      </span>
+    </div>
+  </ng-template>
+  <br><br> -->
+</div>
+
+<div class="row" *ngIf="isValid">
+  <div class="col-6 col-md-6 col-lg-3">
+    <nb-card>
+      <nb-card-header class="custom-font">
+        CATEGORY
+      </nb-card-header>
+      <nb-card-body class="row-height">
+        <div class="category-menu">
+            <custom-menu 
+              [items]="mnu_category" 
+              (onSelect)="onItemSelection($event)" 
+              (onEdit)="onEdit($event)" 
+              (onDelete)="onDelete($event)">
+            </custom-menu>
+          </div>
+        </nb-card-body>
+        <nb-card-footer class="btn-custom">
+          <button *ngIf="myMenu === null" class="btn btn-info btn-semi-round btn-block" (click)="addMenu()">Add Menu</button>
+          <button *ngIf="myMenu !== null" class="btn btn-info btn-semi-round btn-block" (click)="addCategory()">Add Category</button>
+        </nb-card-footer>
+    </nb-card>
+  </div>
+  <div class="col-6 col-md-6 col-lg-3" *ngIf="category_id>0">
+    <nb-card>
+      <nb-card-header class="custom-font">
+        ITEM
+      </nb-card-header>
+      <nb-card-body class="row-height">
+        <div class="item-menu">
+            <custom-menu 
+              [items]="mnu_item" 
+              [edit_enabled]="false"
+              (onSelect)="onItemSelection($event)" 
+              (onEdit)="onEdit($event)" 
+              (onDelete)="onDelete($event)">
+            </custom-menu>
+          </div>
+        </nb-card-body>
+        <nb-card-footer class="btn-custom">
+          <button class="btn btn-info btn-semi-round btn-block" (click)="addItem()">Add Item</button>
+        </nb-card-footer>
+    </nb-card>
+  </div>
+  <div class="col-12 col-md-12 col-lg-6" *ngIf="item_id>0 && category_id>0">
+    <nb-card>
+      <nb-card-header class="custom-font">
+        ITEM DETAIL
+      </nb-card-header>
+      <nb-card-body class="row-height" style="padding: 15px;">
+        <div class="spinner-wrapper" *ngIf="showSpinner">
+          <mat-spinner></mat-spinner>
+        </div>
+        <div class="item-detail">
+            <form [formGroup]="itemDetailForm" (ngSubmit)="submitChange()" enctype="multipart/form-data">
+              <!-- Item Name -->
+              <div class="form-group">
+                <input type="text" formControlName="itemName" class="form-control" [ngClass]="{'form-control-danger': itemDetailForm.controls.itemName.invalid && (itemDetailForm.controls.itemName.dirty || itemDetailForm.controls.itemName.touched)}" id="exampleInputEmail1" placeholder="Item name">
+              </div>
+              <!-- Description -->
+              <div class="form-group">
+                <textarea rows="8" formControlName="itemDescription" placeholder="Description, for example, ingredients, preparation, etc" id="inputDescription" class="form-control"></textarea>
+              </div>
+        
+              <div class="row">
+                <!-- Price -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputPrice">Price ($)</label>
+                    <input type="number" step="1.00" formControlName="itemPrice" class="form-control" [ngClass]="{'form-control-danger': itemDetailForm.controls.itemPrice.invalid && (itemDetailForm.controls.itemPrice.dirty || itemDetailForm.controls.itemPrice.touched)}" id="inputPrice" placeholder="0.00">
+                  </div>
+                </div>
+                <!-- Tax -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="inputTax">Tax (%)</label>
+                    <input type="number" step="0.01" formControlName="itemTax" class="form-control" [ngClass]="{'form-control-danger': itemDetailForm.controls.itemTax.invalid && (itemDetailForm.controls.itemTax.dirty || itemDetailForm.controls.itemTax.touched)}" id="inputTax" placeholder="0.00">
+                  </div>
+                </div>
+                <!-- Thumbnail Image -->
+                <div class="col-md-12">
+                    <div class="form-group">
+                      <label for="thumbnail">Image</label>
+                      <div style="display: flex; flex-direction: column;" class="form-control" >
+                        <img id="menu-item-icon" [src]="linkThunbnail || '../../assets/images/transparent_200x200.png'" width="100" height="100" style="margin-bottom: 10px; border: 1px solid #dadfe6; border-radius: 50%;">
+                        <!-- <i *ngIf="imageUploaded" class="fa fa-check-circle" style="margin-left: 20px;"></i> -->
+                        <!-- <label *ngIf="imageUploadFailed" style="margin-left: 20px;color:red;">Upload failed!</label> -->
+                        <input type="file" ng2FileSelect [uploader]="uploader" accept="image/*" formControlName="thumbnail" placeholder="Thumbnail" (change)="readURL($event)">
+                      </div>
+                    </div>
+                </div>
+                <!-- Item Status -->
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="item-status">Item Status</label>
+                    <ngx-switcher
+                      [firstValue]="1"
+                      [secondValue]="0"
+                      [firstValueLabel]="'Available'"
+                      [secondValueLabel]="'Not available'"
+                      [value]="itemStatus"
+                      (valueChange)="toggleItemStatus($event)" id="item-status" class="form-control"> 
+                    </ngx-switcher>
+                  </div>
+                </div>
+
+                <!-- Item Type -->
+                <div class="col-md-12" *ngIf="selectedRestaurant.tnx_enabled === 'Yes'">
+                  <div class="form-group">
+                    <label>Item Type</label>
+                    <div class="form-control flex-space-around">
+                        <!-- <mat-checkbox formControlName ="isStatic">Static</mat-checkbox> -->
+                        <mat-checkbox formControlName ="isFastLine">Fast Line</mat-checkbox>
+                        <mat-checkbox formControlName ="isInSeat">In Seat Delivery</mat-checkbox>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+        </div>
+        <!-- Submit Change Button -->
+      </nb-card-body>
+      <nb-card-footer class="btn-custom">
+        <button class="btn btn-info btn-semi-round btn-block" [ngClass]="{'disabled' : !imageUploaded}" (click)="submitChanges()">Submit Changes</button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
+
+  <div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name2">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 id="dialog-sizes-name2" class="modal-title pull-left"> Appetize Request</h4>
+          <button type="button" class="close pull-right" aria-label="Close" (click)="smModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body flex-center">
+            <mat-form-field>
+              <input matInput type="number" [(ngModel)]="vendorID" placeholder="Vendor Identifier">
+            </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Select Category" [(ngModel)]="selectedCategoryIndex" (ngModelChange)="onSelectCategory($event)">
+                <mat-option [value]="i" *ngFor="let category of mnu_category; let i = index">{{category.title}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="modal-footer" style="padding: 5px;">
+            <button type="submit" class="btn btn-md btn-success" style="width: 100%;" (click)="addItemsFromAppetize()" [disabled]="!vendorID">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+
+  

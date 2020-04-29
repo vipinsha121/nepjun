@@ -1,0 +1,78 @@
+<div class="row select-client" *ngIf="isValid">
+    <div class="col-12" *ngIf="isClient; else isNotClient">
+        <div class="row select-client">
+            <div class="col-6 col-lg-3">
+                <mat-select [(ngModel)]="selectedRestaurantIndex" (ngModelChange)="onSelectRestaurant($event)">
+                    <mat-option [value]="i" *ngFor="let restaurant of restaurants; let i = index">{{restaurant.name}}</mat-option>
+                </mat-select>
+            </div>
+        </div>
+    </div>
+    <!-- <ng-template #isNotClient>
+      <div class="col-md-12 col-lg-12">
+        <span id="menu">
+          <span *ngIf="selectedRestaurant !== null">{{ selectedRestaurant.name }}</span>
+          <span *ngIf="myMenu !== null"> / </span>
+          <span *ngIf="myMenu !== null">Menu</span> 
+        </span>
+      </div>
+    </ng-template>
+    <br><br> -->
+</div>
+
+<nb-card>
+    <nb-card-header class="flex-space-between">
+        <div>
+            Orders <span class="date-span">(Last Updated on {{today | date:'EE h:mm a'}})</span>
+        </div>
+        <img src="../../assets/images/volume_off.png" alt="volume_off" id="btn-enable-audio" (click)="enableAudio()" *ngIf="showEnableAudio">
+        <img src="../../assets/images/volume_up.png" alt="volume_up" (click)="disableAudio()" *ngIf="!showEnableAudio">
+    </nb-card-header>
+
+    <nb-card-body>
+        <mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+        <mat-accordion displayMode="flat" multi class="mat-table">
+            <section matSort class="mat-header-row">
+                <span class="mat-header-cell" mat-sort-header="status">Status</span>
+                <span class="mat-header-cell" mat-sort-header="id">Order #</span>
+                <span class="mat-header-cell" mat-sort-header="customer">Customer</span>
+                <span class="mat-header-cell" mat-sort-header="paid">Order Total</span>
+                <!-- <span class="mat-header-cell" mat-sort-header="refund">Refund</span> -->
+            </section>
+
+            <mat-expansion-panel *ngFor="let order of displayedRows$ | async" class="mat-expansion-custom">
+                <mat-expansion-panel-header class="mat-row">
+                    <span class="mat-cell">
+                <span>{{getOrderStatus(order)}}<br></span>
+                    <span style="font-size: 0.7rem;">{{ order.time }}</span>
+                    </span>
+                    <span class="mat-cell">{{order.id}}</span>
+                    <span class="mat-cell">{{order.customer_name}}</span>
+                    <span class="mat-cell">{{order.currency_symbol}}{{order.paid}}</span>
+                    <!-- <span class="mat-cell"><button-refund *ngIf="order.status==5" [order_id]="order.id"></button-refund></span> -->
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <table *ngFor="let item of order.items" style="width: 100%;">
+                            <thead>
+                                <tr class="row">
+                                    <th class="col-1">{{ item.amounts }}</th>
+                                    <th class="col-7">{{ item.name }}</th>
+                                    <th class="col-4">{{order.currency_symbol}}{{ item.price }}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="row">
+                                    <td class="col-1"></td>
+                                    <td class="col-7">{{ item.description }}</td>
+                                    <td class="col-4"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </nb-card-body>
+</nb-card>

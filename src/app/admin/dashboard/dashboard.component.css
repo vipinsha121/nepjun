@@ -1,0 +1,68 @@
+.page-dashboard {
+    position: relative;
+}
+.page-dashboard #sales {
+    font-size: 30px;
+    border-bottom: 3px solid;
+}
+
+.page-dashboard .tab-item {
+    float: right;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.page-dashboard .active {
+    color: green;
+}
+
+.page-dashboard .price {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translate(0%, -50%); 
+    transform: translate(0%, -50%); 
+    padding-left: 10px;
+    width: 90%;
+}
+
+.top-selling-item {
+    margin-left: 5px;
+}
+
+.top-selling-item div {
+    margin-bottom: 10px;
+    font-size: 15px;
+    padding: 0;
+}
+
+.page-dashboard nb-card-body {
+    overflow: none;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+p {
+    margin-bottom: 0;
+    font-size: 14px;
+    margin-right: 5px;
+}
+.p-bold {
+    font-weight: 600;
+    color: #5b5b61;
+    font-size: 15px;
+}
+.item-count {
+    background-color: #9b92ff;
+    border-radius: 50%;
+    color: white;
+    padding: 2px;
+    font-size: 13px;
+}

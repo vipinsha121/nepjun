@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h5 class="modal-title">Order # {{order.order_id}}</h5>
+    <i class="nb-close close-modal" (click)="closeModal()"></i>
+</div>
+<div class="modal-body">
+    <div>
+        <div class="row-detail">
+            <p>Customer</p>
+            <p>{{order.customer_name}}</p>
+        </div>
+        <div class="row-detail">
+            <p>Location</p>
+            <p>{{order.customer_location}}</p>
+        </div>
+        <div class="row-detail">
+            <p>Date</p>
+            <p>{{ (order.created_at * 1000) | date:'medium' }}</p>
+        </div>
+    </div>
+    <div class="receipt-wrapper">
+        <div *ngFor="let item of order.items">
+            <div class="receipt-checkout-items">
+                <p><span>{{item.amounts}}</span>{{item.name}}</p>
+                <p>{{order.currency_symbol}}{{(item.amounts*item.price).toFixed(2)}}</p>
+            </div>
+        </div>
+
+        <div class="checkout-total" style="border-bottom: 0;">
+            <div class="flex-space-between">
+                <p translate>Subtotal</p>
+                <p>{{order.currency_symbol}}{{order.order_subtotal.toFixed(2)}}</p>
+            </div>
+            <div class="flex-space-between" *ngIf="order.order_tax != 0">
+                <p translate>Tax</p>
+                <p>{{order.currency_symbol}}{{order.order_tax.toFixed(2)}}</p>
+            </div>
+            <div class="flex-space-between">
+                <p translate>Service Fee</p>
+                <p>{{order.currency_symbol}}{{order.order_service_fee.toFixed(2)}}</p>
+            </div>
+            <div class="flex-space-between"  *ngIf="order.order_delivery_fee != 0">
+                <p translate>Delivery Fee</p>
+                <p>{{order.currency_symbol}}{{order.order_delivery_fee.toFixed(2)}}</p>
+            </div>
+            <div class="flex-space-between" style="font-weight: 600;">
+                <p translate>Total</p>
+                <p>{{order.currency_symbol}}{{order.order_total.toFixed(2)}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer" style="justify-content: space-between;">
+    <button *ngIf="order.status == 5" mat-raised-button style="width: 120px; background-color:#9c1818; color: white;" 
+        (click)="this.updateOrderStatus(8);this.closeModal()">Declined</button>
+    <button *ngIf="order.status == 5" mat-raised-button style="width: 120px; background-color:#a7d6a7" 
+        (click)="this.updateOrderStatus(7);this.closeModal()">Delivered</button>
+</div>

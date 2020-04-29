@@ -1,0 +1,6 @@
+<div class="comp-wrapper">
+  <div *ngIf="!showPhoto" [innerHTML]="cell.getValue()" #htmlValue></div>
+  <img *ngIf="showPhoto" [src]="photo">
+  <input id="fileInput" type="file" ng2FileSelect [uploader]="uploader" accept="image/*" (change)="uploadPhoto($event)" style="display:none;" #file>
+  <button mat-stroked-button color="primary" (click)="file.click()">Upload Image</button>
+</div>

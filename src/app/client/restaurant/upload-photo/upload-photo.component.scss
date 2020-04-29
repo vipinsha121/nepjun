@@ -1,0 +1,14 @@
+.comp-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; 
+}
+
+.comp-wrapper > div {
+    margin-bottom: 5px;
+}
+.comp-wrapper > img {
+    width: 200px;
+    margin-bottom: 5px;
+}

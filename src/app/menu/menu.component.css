@@ -1,0 +1,109 @@
+.page-menu #menu {
+    font-size: 25px;
+    border-bottom: 3px solid;
+}
+
+.page-menu .pending {
+    float: right;
+}
+.page-menu mat-select {
+    border-bottom: 2px solid;
+    font-size: 17px;
+}
+.row-height {
+    height: 60vh;
+    padding: 0.25rem;
+    overflow-y: scroll;
+    overflow-x: hidden !important;
+}
+
+.page-menu .category-menu, .page-menu .item-menu, .page-menu .item-detail {
+    overflow-y: scroll;
+    height: calc(100% - 65px);
+}
+.page-menu .item-detail {
+    padding-right: 15px;
+}
+
+.page-menu .bottom {
+    height: 10%;
+}
+
+.page-menu .bottom button {
+    margin-top: 20px;
+    margin-left: 10px;    
+    width: calc(100% - 20px);
+    height: 45px;
+}
+
+.page-menu .menu-item {
+    cursor: pointer;
+}
+.custom-font {
+    color: #26A9E9 !important;
+    padding: 1rem !important;
+}
+
+.btn-custom {
+    padding: 0.25rem !important;
+}
+.btn-custom > button {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+}
+
+.flex-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #2ab2ec !important;
+}
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flex-space-between {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+.flex-end i {
+    font-size: 45px;
+}
+
+.flex-end p {
+    margin-bottom: 0;
+}
+
+h4.modal-title {
+    font-weight: 500;
+    font-size: 1.125rem;
+}
+
+/* fix for modal with mat-select */
+::ng-deep .cdk-overlay-container {
+    z-index: 9999 !important;
+}
+
+.spinner-wrapper {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 800px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 5;
+}

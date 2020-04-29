@@ -1,0 +1,100 @@
+.custom-menu-layout {
+    padding: 0;
+    width: 100%;
+    padding-top: 10px;
+    border-bottom: 1px solid #ebeef2;
+
+    p {
+        margin-bottom: 0;
+    }
+    .vendor-id {
+        font-size: 14px;
+        color: #c2c2c2;
+        font-weight: 600;
+        padding-left: 10px;
+    }
+    .thumbnail {
+        // width: 50%;
+        // height: 50%;
+        width: 100px;
+        height: 100px;
+        margin: auto;
+        margin-bottom: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    i {
+        font-size: 25px;
+    }
+
+    .custom-menu-item {
+        box-sizing: border-box;
+        border-radius: 0.25rem;
+        width: 100%;
+        opacity: 0.8;
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        cursor: pointer;
+
+        &:hover {
+            font-weight: bold;
+            opacity: 1;
+        }
+
+        &.active
+        {
+            border: 2px solid #26A9E9;
+            color: #26A9E9;
+            font-weight: bold;
+        }
+
+        .icon {
+            width: 2.5rem;
+            font-size: 2.5rem;
+            display: flex;
+        }
+
+        .action {
+            display: flex;
+            margin-left: auto;
+    
+            .icon {
+                width: 1.5rem;
+                font-size: 1.5rem;
+                display: flex;
+
+                // animation-play-state: paused;
+                
+                :hover {
+                    // animation-play-state: running;
+                    animation: scaling 0.3s ease-in-out;
+                    -webkit-animation: scaling 0.3s ease-in-out;
+                }
+                :active {
+                    opacity: 0.8;
+                }
+            }
+
+            @keyframes scaling {
+                0% {
+                    transform: scale(1.0);
+                    -webkit-transform: scale(1.0);
+                }       
+                40% {
+                    transform: scale(1.5);
+                    -webkit-transform: scale(1.5);
+                }
+                70% {
+                    transform: scale(0.8);
+                    -webkit-transform: scale(0.8);
+                }
+                100% {
+                    transform: scale(1.5);
+                    -webkit-transform: scale(1.5);
+                }
+            }
+        }
+    }    
+}

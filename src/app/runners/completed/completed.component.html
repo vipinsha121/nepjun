@@ -1,0 +1,58 @@
+<nb-card>
+    <nb-card-header>
+        Completed Orders
+    </nb-card-header>
+
+    <nb-card-body>
+        <mat-paginator #paginator [length]="totalRows$ | async" [pageIndex]="0" [pageSize]="10"></mat-paginator>
+
+        <mat-accordion displayMode="flat" multi class="mat-table">
+            <section matSort class="mat-header-row">
+                <span class="mat-header-cell" mat-sort-header="id">Order #</span>
+                <span class="mat-header-cell" mat-sort-header="customer">Customer</span>
+                <span class="mat-header-cell" mat-sort-header="paid">Date</span>
+            </section>
+
+            <mat-expansion-panel *ngFor="let order of displayedRows$ | async" class="mat-expansion-custom">
+                <mat-expansion-panel-header class="mat-row">
+                    <span class="mat-cell" [ngStyle]="{'color': order.status == 7 ?  '#80e680' : '#fb2e2e'}">{{order.id}}</span>
+                    <span class="mat-cell">{{order.customer_name}}</span>
+                    <span class="mat-cell" style="padding-right: 5px">{{getDate(order)}}</span>
+                </mat-expansion-panel-header>
+                <div class="row">
+                    <div class="receipt-wrapper">
+                        <div *ngFor="let item of order.items">
+                            <div class="receipt-checkout-items">
+                                <p><span>{{item.amounts}}</span>{{item.name}}</p>
+                                <p>{{order.currency_symbol}}{{(item.amounts*item.price).toFixed(2)}}</p>
+                            </div>
+                        </div>
+                
+                        <div class="checkout-total" style="border-bottom: 0;">
+                            <div class="flex-space-between">
+                                <p translate>Subtotal</p>
+                                <p>{{order.currency_symbol}}{{order.order_subtotal.toFixed(2)}}</p>
+                            </div>
+                            <div class="flex-space-between" *ngIf="order.order_tax != 0">
+                                <p translate>Tax</p>
+                                <p>{{order.currency_symbol}}{{order.order_tax.toFixed(2)}}</p>
+                            </div>
+                            <div class="flex-space-between">
+                                <p translate>Service Fee</p>
+                                <p>{{order.currency_symbol}}{{order.order_service_fee.toFixed(2)}}</p>
+                            </div>
+                            <div class="flex-space-between" *ngIf="order.order_delivery_fee != 0">
+                                <p translate>Delivery Fee</p>
+                                <p>{{order.currency_symbol}}{{order.order_delivery_fee.toFixed(2)}}</p>
+                            </div>
+                            <div class="flex-space-between" style="font-weight: 600;">
+                                <p translate>Total</p>
+                                <p>{{order.currency_symbol}}{{order.order_total.toFixed(2)}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </nb-card-body>
+</nb-card>

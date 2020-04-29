@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h5 class="modal-title">Order Detail</h5>
+    <i class="nb-close close-modal" (click)="closeModal()"></i>
+</div>
+<div class="modal-body">
+      <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+</div>
+
+<div class="modal-footer flex-space-between" style="padding: 0.7rem 1.25rem;">
+    <div *ngIf="order.status == 4 || order.status == 1" style="min-width: 44%;">
+        <p *ngIf="order.runner_id != 0" style="padding-bottom: 12px;"><strong>Assigned Runner: </strong> <span>{{order.runner_name}}</span></p>
+        <div class="runner-chooser" *ngIf="order.is_order_accepted_by_runner !== 'Accepted'">
+            <mat-select [(ngModel)]="selectedRunnerId" [placeholder]="order.status == 1 ? 'Select Runner' : 'Change Runner'">
+                <mat-option [value]="runner.id" *ngFor="let runner of runners; let i = index">{{runner.runner_name}} | Pending Orders: {{runner.pending_orders}}</mat-option>
+            </mat-select>
+        </div>
+        <button mat-raised-button style="width: 120px;margin-top: 10px;" (click)="onAssignRunner()">Save</button>
+    </div>
+
+    <button *ngIf="order.status == 0" mat-raised-button style="width: 120px;" (click)="onCancelOrder()">Cancel Order</button>
+    <button *ngIf="order.status == 0" mat-raised-button color="primary" style="width: 120px;" (click)="onAcceptOrder()">Accept</button>
+    <button *ngIf="order.status == 2 || order.status == 5 || order.status == 6" (click)="closeModal()" 
+        mat-raised-button style="width: 120px;" (click)="closeModal()">OK</button>
+</div>

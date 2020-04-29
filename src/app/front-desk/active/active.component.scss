@@ -1,0 +1,21 @@
+@import "./src/assets/styles/index.scss";
+
+.search-wrapper {
+    position: relative;
+    width: 70%;
+    margin-bottom: 20px;
+    input {
+        width: 100%;
+        border-radius: 4px;
+    }
+    .close-search {
+        position: absolute;
+        right: 5px;
+        z-index: 2;
+        color: black;
+        top: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}
+

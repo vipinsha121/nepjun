@@ -1,0 +1,89 @@
+$color-bg: indigo;
+$color-bg-active: #280f54;
+$color-fg-highlight: #663ab7;
+$color-fg: white;
+$red: #9c1818;
+$green: #a7d6a7;
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-space-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+}
+
+input:focus {
+    outline: none;
+}
+
+
+.date-span {
+    font-size: 14px;
+    color: gray; 
+}
+.select-client mat-select {
+    border-bottom: 2px solid;
+    font-size: 17px;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.close-modal {
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* fix for modal with mat-select */
+::ng-deep .cdk-overlay-container {
+    z-index: 9999 !important;
+}
+
+::ng-deep .nb-theme-default .modal-footer {
+    padding: 20px;
+}
+
+::ng-deep .nb-theme-default ng2-smart-table table tr th, 
+::ng-deep .nb-theme-default ng2-smart-table table tr td {
+    padding: 7px 12px !important;
+    background-color: $color-bg;
+}
+
+::ng-deep .nb-theme-default ng2-smart-table nav.ng2-smart-pagination-nav .pagination li.active a, 
+::ng-deep .nb-theme-default ng2-smart-table nav.ng2-smart-pagination-nav .pagination li.active a:hover, 
+::ng-deep .nb-theme-default ng2-smart-table nav.ng2-smart-pagination-nav .pagination li.active a:focus, 
+::ng-deep .nb-theme-default ng2-smart-table nav.ng2-smart-pagination-nav .pagination li.active > span, 
+::ng-deep .nb-theme-default ng2-smart-table nav.ng2-smart-pagination-nav .pagination li.active > span:hover, 
+::ng-deep .nb-theme-default ng2-smart-table nav.ng2-smart-pagination-nav .pagination li.active > span:focus {
+    background-color: $color-bg-active;
+}
+
+::ng-deep .mat-select-placeholder,
+::ng-deep .mat-select-arrow,
+::ng-deep .mat-select-value {
+    color: $color-fg;
+}

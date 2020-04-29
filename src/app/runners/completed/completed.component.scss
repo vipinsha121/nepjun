@@ -1,0 +1,34 @@
+@import "./src/assets/styles/index.scss";
+
+.receipt-wrapper {
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.receipt-checkout-items {
+    @extend .flex-space-between;
+    border-bottom: 1px solid #e9ecef;
+    padding: 7px 0;
+}
+
+.receipt-checkout-items p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.receipt-checkout-items span {
+  margin-right: 5px;
+}
+
+.checkout-total {
+  font-size: 13px;
+  padding-top: 15px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid grey;
+}
+.checkout-total p {
+  margin: 0;
+}
+  
+  

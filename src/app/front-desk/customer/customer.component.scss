@@ -1,0 +1,33 @@
+@import "./src/assets/styles/index.scss";
+
+.customer-name {
+    text-decoration: underline;
+    text-decoration-color: $color-fg-highlight;
+    cursor: pointer;
+}
+.customer-name:hover {
+    color: $color-fg-highlight;
+}
+
+.row-detail {
+    @extend .flex-space-between;
+    align-items: flex-start;
+    width: 100%;
+    color: $color-fg;
+    p {
+        margin: 5px 0;
+    }
+    p:first-child {
+        width: 200px;
+        font-weight: bold;
+    }
+    p:nth-child(2) {
+        width: 100%;
+    }
+    img {
+        max-width: 350px;
+        height: 200px;
+        border-radius: 4px;
+        width: 100%;
+    }
+}

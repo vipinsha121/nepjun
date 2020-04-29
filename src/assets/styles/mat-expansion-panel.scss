@@ -1,0 +1,81 @@
+@import "./common.scss";
+
+.mat-cell, .mat-header-cell {
+    flex: 1;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-size: 15px;
+    color: $color-fg;
+}
+.mat-accordion .mat-header-row {
+    padding-left: 1.5rem;
+    padding-right: 2rem;
+    border-bottom: none;
+}
+.mat-expansion-panel-header.mat-row {
+    border-bottom: none;
+    background-color: $color-bg;
+    color: $color-fg;
+}
+.mat-expansion-panel {
+    background-color: $color-bg-active;
+    color: $color-fg;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+    color: $color-fg !important;
+}
+.mat-expansion-custom {
+    box-shadow: none !important; 
+    border-bottom: 1px solid $color-fg-highlight;
+    border-radius: 4px;
+}
+  
+//copied from https://github.com/angular/material2/blob/master/src/lib/table/table.scss
+$mat-header-row-height: 56px;
+$mat-row-height: 58px;
+$mat-row-horizontal-padding: 24px;
+  
+.mat-table {
+    display: block;
+    background-color: $color-bg;
+    color: $color-fg;
+}
+mat-paginator {
+    background-color: $color-bg;
+    color: $color-fg;
+}
+  
+.mat-header-row {
+    min-height: $mat-header-row-height;
+    border-bottom: 1px solid $color-fg-highlight !important;
+    border-top: 1px solid $color-fg-highlight;
+}
+
+.mat-row {
+    min-height: $mat-row-height;
+    align-items: center;
+}
+
+.mat-row, .mat-header-row {
+    display: flex;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    align-items: center;
+    padding: 0 $mat-row-horizontal-padding;
+    box-sizing: border-box;
+
+    // Workaround for https://goo.gl/pFmjJD in IE 11. Adds a pseudo
+    // element that will stretch the row the correct height. See:
+    // https://connect.microsoft.com/IE/feedback/details/802625
+    &::after {
+        display: inline-block;
+        min-height: inherit;
+        content: '';
+    }
+}
+
+::ng-deep .nb-theme-default .modal-header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,17 @@
+<nb-card>
+  <nb-card-header class="flex-space-between">
+    <p style="margin:0;">Active Orders <span class="date-span">(Last Updated on {{today | date:'EE h:mm a'}})</span></p>
+    <button mat-raised-button (click)="runAlgorithm()">Assign Runners</button>
+  </nb-card-header>
+
+  <nb-card-body>
+    <div class="flex-center">
+      <div class="search-wrapper">
+        <input #search class="search" [(ngModel)]="inputValue" type="text" placeholder="Search..." (change)="onSearch(search.value)" 
+          (keydown.backspace)="onSearch(search.value)" (keydown)="onSearch(search.value)" (keydown.enter)="onSearch(search.value)">
+          <i class="nb-close close-search" (click)="clearSearch()"></i>
+      </div>
+    </div>
+    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>

@@ -1,0 +1,55 @@
+<div class="col-md-12 col-lg-12 page-dashboard">
+    <div class="row select-client">
+        <div class="col-6 col-lg-3">
+            <mat-select [(ngModel)]="selectedRestaurantIndex" (ngModelChange)="onSelectRestaurant($event)" *ngIf="isClient; else isNotClient">
+                <mat-option [value]="i" *ngFor="let restaurant of restaurants; let i = index">{{restaurant.name}}</mat-option>
+            </mat-select>
+            <ng-template #isNotClient>
+                <span class="sales-title" *ngIf="selectedRestaurant !== null">{{ selectedRestaurant.name }}</span>
+                <span class="sales-title"> / Sales</span>
+            </ng-template>
+        </div>
+        <div class="col-6 col-lg-9 flex-end" *ngIf="enableDatePicker">
+            <input type="text" placeholder="Pick a date range" class="date-picker" #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue" (bsValueChange)="onSelectDate($event)">
+            <img src="../../assets/images/twotone_calendar.png" alt="calendar" (click)="drp.toggle()" [attr.aria-expanded]="drp.isOpen">
+        </div>
+    </div>
+</div><br>
+
+<!-- <custom-menu></custom-menu> -->
+
+<nb-card class="page-dashboard" *ngIf="isValid">
+    <nb-card-header>
+        <span [matBadge]="totalItems" matBadgeOverlap="false" matBadgePosition="after" *ngIf="totalItems > 0">Sold Items</span>
+        <span *ngIf="totalItems === 0">Sold Items</span>
+    </nb-card-header>
+    <nb-card-body>
+        <div class="row top-selling-item" style="border-bottom: 1px solid #edf0f4;" *ngIf="totalItems > 0">
+            <div *ngFor="let item of topSellingItems" class="col-md-4">
+                <span [matBadge]="item.qty" matBadgeOverlap="false" matBadgePosition="after" matBadgeColor="mat-black">{{ item.name }}</span>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-md-12">
+                <div echarts [options]="chartOptions" class="echart"></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-12 flex-space-around">
+                <div class="flex-start">
+                    <p class="p-bold">Subtotal: </p>
+                    <p>{{selectedRestaurant.currency_symbol}}{{ subTotal }}</p>
+                </div>
+                <div class="flex-start">
+                    <p class="p-bold">Service Fee: </p>
+                    <p>{{selectedRestaurant.currency_symbol}}{{ serviceFee }}</p>
+                </div>
+                <div class="flex-start">
+                    <p class="p-bold">Tax: </p>
+                    <p>{{selectedRestaurant.currency_symbol}}{{ totalTax }}</p>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>
+<br><br>

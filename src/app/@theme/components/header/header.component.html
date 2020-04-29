@@ -1,0 +1,21 @@
+<div class="header-container"
+     [class.left]="position === 'normal'"
+     [class.right]="position === 'inverse'">
+  <div class="logo-containter">
+    <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
+    <img style="height: 75px;" src="../../../../assets/images/logo_dark_background.png" alt="logo" (click)="goToHome()">
+  </div>
+  <!-- <ngx-theme-switcher></ngx-theme-switcher> -->
+</div>
+
+<div *ngIf="logoutAvailable" style="width: 100%; display: flex; align-items: center;">
+  <nb-actions
+    size="medium"
+    class="header-container"
+    [class.right]="position === 'normal'"
+    [class.left]="position === 'inverse'">
+      <nb-action *nbIsGranted="['view', 'user']" >
+        <nb-user [nbContextMenu]="userMenu" [name]="user?.first_name+' '+user?.last_name" [picture]="user?.picture"></nb-user>
+      </nb-action>
+  </nb-actions>
+</div>

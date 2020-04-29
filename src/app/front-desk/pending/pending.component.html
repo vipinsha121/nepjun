@@ -1,0 +1,11 @@
+<nb-card>
+  <nb-card-header class="flex-space-between">
+    <p style="margin:0">New Orders <span class="date-span">(Last Updated on {{today | date:'EE h:mm a'}})</span></p>
+    <img src="../../../assets/images/volume_off.png" alt="volume_off" id="btn-enable-audio" (click)="enableAudio()" *ngIf="showEnableAudio">
+    <img src="../../../assets/images/volume_up.png" alt="volume_up" (click)="disableAudio()" *ngIf="!showEnableAudio">
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
+  </nb-card-body>
+</nb-card>
